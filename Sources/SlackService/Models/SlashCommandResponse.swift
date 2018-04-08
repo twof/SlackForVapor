@@ -18,8 +18,13 @@ public enum SlashCommandResponseType: String, Content {
 }
 
 public struct SlashCommandResponse: Content {
-    let responseType: SlashCommandResponseType
-    let text: String
+    public let responseType: SlashCommandResponseType
+    public let text: String
+    
+    public init(responseType: SlashCommandResponseType=.ephemeral, text: String) {
+        self.responseType = responseType
+        self.text = text
+    }
     
     enum CodingKeys: String, CodingKey {
         case responseType = "response_type"
