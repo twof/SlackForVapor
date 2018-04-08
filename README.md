@@ -23,3 +23,28 @@ router.post(SlashCommand.self, at: "queue") { (req, slashCommand) -> Future<Slas
 ```
 The default response type is `.ephemeral`.
 
+## Bot Client
+
+Registering your client
+```swift
+if let verificationToken = Environment.get("SLACK_VERIFICATION_TOKEN"),
+    let botToken = Environment.get("SLACK_BOT_TOKEN") {
+    let slackService = Slack(verificationToken: verificationToken, slackBotToken: botToken)
+    services.register(slackService, as: SlackProvider.self)
+}
+```
+
+Creating a client
+```swift
+let slackClient = try req.make(SlackProvider.self)
+```
+
+Opening up IM channels
+```swift
+return try slackClient.openIM(with: userId, on: req)
+```
+
+Sending messages to a chat
+```swift
+return try slackClient.send(message: "The restroom is ready for you", to: channelId, on: req)
+```
