@@ -3,40 +3,46 @@ import Vapor
 
 //{
 //    "ok": true,
-//    "channel": "C1H9RESGL",
-//    "ts": "1503435956.000247",
+//    "channel": "DA30NL4GM",
+//    "ts": "1523183331.000083",
 //    "message": {
-//        "text": "Here's a message for you",
-//        "username": "ecto1",
-//        "bot_id": "B19LU7CSY",
-//        "attachments": [
-//        {
-//        "text": "This is an attachment",
-//        "id": 1,
-//        "fallback": "This is an attachment's fallback"
-//        }
-//        ],
 //        "type": "message",
-//        "subtype": "bot_message",
-//        "ts": "1503435956.000247"
+//        "user": "UA20RHA4C",
+//        "text": "The restroom is ready for you",
+//        "bot_id": "BA20RHA3E",
+//        "ts": "1523183331.000083"
+//    },
+//    "warning": "superfluous_charset",
+//    "response_metadata": {
+//        "warnings": [
+//        "superfluous_charset"
+//        ]
 //    }
 //}
 
 public struct Attachment: Content {
-    let text: String
-    let id: Int
-    let fallback: String
+    public let text: String
+    public let id: Int
+    public let fallback: String
 }
 
 public struct Message: Content {
-    let text: String
-    let username: String
-    let attachments: [Attachment]
-    let type: String
-    let subtype: String
+    public let type: String
+    public let username: String
+    public let text: String
+    public let attachments: [Attachment]?
+    public let subtype: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case text
+        case username = "user"
+        case attachments
+        case type
+        case subtype
+    }
 }
 
 public struct SendMessageResponse: Content {
-    let channel: String
-    let message: Message
+    public let channel: String
+    public let message: Message
 }
