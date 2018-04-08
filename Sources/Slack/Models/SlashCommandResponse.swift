@@ -21,7 +21,7 @@ public struct SlashCommandResponse: Content {
     public let responseType: SlashCommandResponseType
     public let text: String
     
-    public init(responseType: SlashCommandResponseType=.ephemeral, text: String) {
+    public init(responseType: SlashCommandResponseType = .ephemeral, text: String) {
         self.responseType = responseType
         self.text = text
     }
